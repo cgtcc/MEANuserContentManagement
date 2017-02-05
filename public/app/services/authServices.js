@@ -31,7 +31,7 @@ angular.module('authServices', [])
     authFactory.getUser = function() {
         // Check first if user has a token
         if (AuthToken.getToken()) {
-            return $http.post('/api/me'); // Return user's data
+            return $http.post('/me'); // Return user's data
         } else {
             $q.reject({ message: 'User has no token' }); // Reject if no token exists
         }
