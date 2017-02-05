@@ -1,0 +1,50 @@
+{
+  "name": "nodejs-cms",
+  "version": "1.0.0",
+  "description": "A CMS base built under the nodeJS runtime, with AngularJS and ExpressJS frameworks.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/grayrainbow/nodejs-cms.git"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "cms",
+    "passport",
+    "login",
+    "jwt",
+    "user",
+    "management",
+    "content",
+    "management"
+  ],
+  "author": "GrayRainbow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grayrainbow/nodejs-cms/issues"
+  },
+  "homepage": "https://github.com/grayrainbow/nodejs-cms#readme",
+  "dependencies": {
+    "animate.css": "^3.5.2",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.16.0",
+    "express": "^4.14.1",
+    "express-session": "^1.15.0",
+    "helmet": "^3.4.0",
+    "jsonwebtoken": "^7.2.1",
+    "mongoose": "^4.8.1",
+    "mongoose-title-case": "0.0.4",
+    "mongoose-validator": "^1.2.5",
+    "morgan": "^1.8.0",
+    "nodemailer": "^3.0.2",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "sendgrid": "^4.7.1"
+  }
+}
