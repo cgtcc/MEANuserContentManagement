@@ -1,21 +1,19 @@
 var User = require('../models/user'); // Import User Model
 var jwt = require('jsonwebtoken'); // Import JWT Package
-var secret = 'harrypotter'; // Create custom secret for use in JWT
 var nodemailer = require('nodemailer'); // Import Nodemailer Package
 var sgTransport = require('nodemailer-sendgrid-transport'); // Import Nodemailer Sengrid Transport Package
+var User = require('../config.js'); // Import User Model
 
 module.exports = function(router) {
 
    
-
-    // Nodemailer options (use with g-mail or SMTP)
     var client = nodemailer.createTransport({
         service: 'Zoho',
         auth: {
             user: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX', // Your email address
             pass: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' // Your password
         }
-    });
+    });    
     // var client = nodemailer.createTransport(sgTransport(options)); // Use if using sendgrid configuration
     // End Sendgrid Configuration Settings  
 
@@ -26,7 +24,7 @@ module.exports = function(router) {
         user.password = req.body.password; // Save password from request to User object
         user.email = req.body.email; // Save email from request to User object
         user.name = req.body.name; // Save name from request to User object
-        user.temporarytoken = jwt.sign({ username: user.username, email: user.email }, secret, { expiresIn: '24h' }); // Create a token for activating account through e-mail
+        user.temporarytoken = jwt.sign({ username: user.username, email: user.email }, config.secret, { expiresIn: '24h' }); // Create a token for activating account through e-mail
 
         // Check if request is valid and not empty or null
         if (req.body.username === null || req.body.username === '' || req.body.password === null || req.body.password === '' || req.body.email === null || req.body.email === '' || req.body.name === null || req.body.name === '') {
@@ -186,7 +184,7 @@ module.exports = function(router) {
                         } else if (!user.active) {
                             res.json({ success: false, message: 'Account is not yet activated. Please check your e-mail for activation link.', expired: true }); // Account is not activated 
                         } else {
-                            var token = jwt.sign({ username: user.username }, secret, { expiresIn: '24h' }); // Logged in: Give user token
+                            var token = jwt.sign({ username: user.username }, config.secret, { expiresIn: '24h' }); // Logged in: Give user token
                             res.json({ success: true, message: 'User authenticated!', token: token }); // Return token in JSON object to controller
                         }
                     }
@@ -220,7 +218,7 @@ module.exports = function(router) {
             } else {
                 var token = req.params.token; // Save the token from URL for verification 
                 // Function to verify the user's token
-                jwt.verify(token, secret, function(err, decoded) {
+                jwt.verify(token, config.secret, function(err, decoded) {
                     if (err) {
                         res.json({ success: false, message: 'Activation link has expired.' }); // Token is expired
                     } else if (!user) {
@@ -322,7 +320,7 @@ module.exports = function(router) {
                 });
                 res.json({ success: false, message: 'Something went wrong. This error has been logged and will be addressed by our staff. We apologize for this inconvenience!' });
             } else {
-                user.temporarytoken = jwt.sign({ username: user.username, email: user.email }, secret, { expiresIn: '24h' }); // Give the user a new token to reset password
+                user.temporarytoken = jwt.sign({ username: user.username, email: user.email }, config.secret, { expiresIn: '24h' }); // Give the user a new token to reset password
                 // Save user's new token to the database
                 user.save(function(err) {
                     if (err) {
@@ -407,7 +405,7 @@ module.exports = function(router) {
                 } else if (!user.active) {
                     res.json({ success: false, message: 'Account has not yet been activated' }); // Return error if account is not yet activated
                 } else {
-                    user.resettoken = jwt.sign({ username: user.username, email: user.email }, secret, { expiresIn: '24h' }); // Create a token for activating account through e-mail
+                    user.resettoken = jwt.sign({ username: user.username, email: user.email }, config.secret, { expiresIn: '24h' }); // Create a token for activating account through e-mail
                     // Save token to user in database
                     user.save(function(err) {
                         if (err) {
@@ -463,7 +461,7 @@ module.exports = function(router) {
             } else {
                 var token = req.params.token; // Save user's token from parameters to variable
                 // Function to verify token
-                jwt.verify(token, secret, function(err, decoded) {
+                jwt.verify(token, config.secret, function(err, decoded) {
                     if (err) {
                         res.json({ success: false, message: 'Password link has expired' }); // Token has expired or is invalid
                     } else {
@@ -538,7 +536,7 @@ module.exports = function(router) {
         // Check if token is valid and not expired  
         if (token) {
             // Function to verify token
-            jwt.verify(token, secret, function(err, decoded) {
+            jwt.verify(token, config.secret, function(err, decoded) {
                 if (err) {
                     res.json({ success: false, message: 'Token invalid' }); // Token has expired or is invalid
                 } else {
@@ -583,7 +581,7 @@ module.exports = function(router) {
                 if (!user) {
                     res.json({ success: false, message: 'No user was found' }); // Return error
                 } else {
-                    var newToken = jwt.sign({ username: user.username, email: user.email }, secret, { expiresIn: '24h' }); // Give user a new token
+                    var newToken = jwt.sign({ username: user.username, email: user.email }, config.secret, { expiresIn: '24h' }); // Give user a new token
                     res.json({ success: true, token: newToken }); // Return newToken in JSON object to controller
                 }
             }

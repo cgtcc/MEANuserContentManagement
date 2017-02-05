@@ -2,13 +2,13 @@ var passport = require('passport')
   , FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('../models/user');
 var session = require('express-session');
-
+var config = require('../config.js');
 module.exports = function(app, passport) {
 
     //MIDDLEWARES
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use(session({ secret: 'keyboard cat',
+    app.use(session({ config.secret: config.secret,
                               resave:false,
                               saveUninitialized:true,
                               cookie:{secure:true}

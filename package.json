@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-cms",
+  "name": "meanusercontentmanagement",
   "version": "1.0.0",
-  "description": "A CMS base built under the nodeJS runtime, with AngularJS and ExpressJS frameworks.",
+  "description": "A CMS base built under the nodeJS runtime, using MongoDb, and AngularJS, ExpressJS frameworks.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/grayrainbow/nodejs-cms.git"
+    "url": "git+ssh://git@github.com:grayrainbow/MEANuserContentManagement.git"
   },
   "keywords": [
     "node",
