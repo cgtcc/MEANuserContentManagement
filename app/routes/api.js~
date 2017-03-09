@@ -10,8 +10,8 @@ module.exports = function(router) {
     var client = nodemailer.createTransport({
         service: 'Zoho',
         auth: {
-            user: configurations.user, // Your email address
-            pass: configurations.pass // Your password
+            user: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX', // Your email address
+            pass: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' // Your password
         }
     });    
     // var client = nodemailer.createTransport(sgTransport(options)); // Use if using sendgrid configuration

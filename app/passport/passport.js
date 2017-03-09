@@ -3,12 +3,13 @@ var passport = require('passport')
 var User = require('../models/user');
 var session = require('express-session');
 var config = require('../config.js');
+var secret = "btiuyituyt"
 module.exports = function(app, passport) {
 
     //MIDDLEWARES
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use(session({ config.secret: config.secret,
+    app.use(session({ secret: config.secret,
                               resave:false,
                               saveUninitialized:true,
                               cookie:{secure:true}
