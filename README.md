@@ -11,6 +11,4 @@ Check to confirm you have NodeJS >= 6 installed and mongodb is running.
 <h3>TODO (short term roadmap) before using this script</h3>
 - implement JWE
 - remove any nominal information from JWE and fetch from MongoDb instead
-- add CRUD operations to create / read / update / delete the site content, and user attached objects#� �M�E�A�N�u�s�e�r�C�o�n�t�e�n�t�M�a�n�a�g�e�m�e�n�t�
-�
-�
+- add CRUD operations to create / read / update / delete the site content, and user attached objects
